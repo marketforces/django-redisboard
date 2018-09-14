@@ -14,7 +14,7 @@ try:
     from django.utils.datastructures import SortedDict as OrderedDict
 except ImportError:
     from django.utils.datastructures import OrderedDict
-    
+
 
 
 logger = getLogger(__name__)
@@ -209,7 +209,7 @@ def _get_db_details(server, db):
 
     else:
         sampling = False
-        for key in conn.keys():
+        for key in conn.keys(server.keys_filter):
             key_details[key] = _get_key_info(conn, key)
 
     return dict(

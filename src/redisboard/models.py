@@ -87,6 +87,13 @@ class RedisServer(models.Model):
         help_text=_("Number of random keys shown when sampling is used. Note that each key translates to a RANDOMKEY call in redis.")
     )
 
+    keys_filter = models.CharField(
+        _("Key filter"),
+        default='*',
+        max_length=50,
+        help_text=_('Parameter to pass the KEYS command for the list of keys to show. Defaults to all keys.')
+    )
+
     def clean(self):
         if not self.hostname.startswith('/') and not self.port:
             raise ValidationError(_('Please provide either a hostname AND a port or the path to a redis socket'))
